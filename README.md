@@ -24,7 +24,7 @@ Este repositorio albergará una API de gestión de tareas construida con Laravel
    ```bash
    git clone git@github.com:zarstany/ToDo.git
 2. Instalar dependencias
-    '''Bash
+   ```Bash
     composer install
 
 3. Generate Key
