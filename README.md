@@ -26,8 +26,11 @@ Este repositorio albergará una API de gestión de tareas construida con Laravel
 2. Instalar dependencias
    ```Bash
     composer install
+3. Crear archivo .env
+   ```Bash
+   cp .env.example .env
 
-3. Generate Key
+4. Generate Key
       ```Bash
 
    php artisan key:generate
