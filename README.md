@@ -28,9 +28,12 @@ Este repositorio albergará una API de gestión de tareas construida con Laravel
     composer install
 
 3. Generate Key
+      ```Bash
+
    php artisan key:generate
 
-4. Correr migraciones
+5. Correr migraciones
+   ```Bash
     php artisan migrate
 
 ## Uso de la api
