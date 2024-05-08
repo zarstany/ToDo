@@ -32,3 +32,5 @@ Este repositorio albergará una API de gestión de tareas construida con Laravel
 
 4. Correr migraciones
     php artisan migrate
+
+## Uso de la api
