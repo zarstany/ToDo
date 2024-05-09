@@ -3,7 +3,7 @@
 namespace App\Http\V1\Controllers\Auth;
 
 use App\Http\V1\Controllers\Controller;
-use App\Http\V1\Responses\Auth\LoginErrorResponse;
+use App\Http\V1\Responses\Auth\RegisterErrorResponse;
 use App\Http\V1\Transformers\AuthUserTransformer;
 use App\Libraries\Auth\AuthUserDTO;
 use App\Libraries\Responders\Contracts\APIResponseInterface;
@@ -20,11 +20,11 @@ class RegisterController
     public function __construct(
         private readonly RegisterUseCaseInterface $registerUserUseCase,
         private readonly APIResponseInterface $apiResponse,
-        private readonly LoginErrorResponse $loginErrorResponse
-    ){
+        private readonly RegisterErrorResponse $registerErrorResponse
+    ) {
     }
 
-    public function __invoke(Request $request):JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
@@ -34,6 +34,7 @@ class RegisterController
 
         if ($validator->fails()) {
             Log::error('Parameters invalid', ['Register' => 'parameters invalid for register']);
+
             return $this->apiResponse->respondFormErrors($validator->errors(), Controller::HTTP_BAD_REQUEST);
         }
         $name = $request->get('name');
@@ -48,11 +49,10 @@ class RegisterController
             $this->registerUserUseCase->execute($userDTo);
             $httpObjectDTO = new HttpObjectDTO();
             $httpObjectDTO->setItem($userDTo);
-            return $this->apiResponse->responseItem($httpObjectDTO,new AuthUserTransformer());
-        }
-        catch (Throwable $throwable) {
-            return $this->loginErrorResponse->handle($throwable, $email, $password, );
+
+            return $this->apiResponse->responseItem($httpObjectDTO, new AuthUserTransformer());
+        } catch (Throwable $throwable) {
+            return $this->registerErrorResponse->handle($throwable, $email, $password);
         }
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\V1\Responses\Auth;
 
-use App\Exceptions\Auth\EmailUsedException;
 use App\Exceptions\Auth\InvalidCredentialsException;
 use App\Exceptions\User\UserNotFoundByEmailException;
 use App\Http\V1\Controllers\Controller;
@@ -27,6 +26,8 @@ class LoginErrorResponse
      */
     private array $awareOf = [
         InvalidCredentialsException::class => 'invalidCredentialsException',
+        UserNotFoundByEmailException::class => 'userNotFoundByEmailException',
+
     ];
 
     /**
@@ -36,8 +37,8 @@ class LoginErrorResponse
     {
         $className = get_class($throwable);
 
-        if (!array_key_exists($className, $this->awareOf)) {
-            $this->logger->error('v1 register error', [
+        if (! array_key_exists($className, $this->awareOf)) {
+            $this->logger->error('v1 login error', [
                 'class' => get_class($throwable),
                 'email' => $email,
                 'password' => $password,
@@ -62,4 +63,14 @@ class LoginErrorResponse
         return $this->apiResponse->respondError($error, Controller::HTTP_BUSINESS_ERROR);
     }
 
+    private function userNotFoundByEmailException(UserNotFoundByEmailException $userNotFoundByEmailException): JsonResponse
+    {
+        $error = new HttpErrorObjectDTO();
+        $error->setTitle('Account Not Found')
+            ->setCode('ERROR_CODE_ACCOUNT_NOT_FOUND')
+            ->setDetail('No account found with that email. Haven\'t signed up yet? Register on our site!')
+            ->setStatus(Controller::HTTP_BUSINESS_ERROR); // Using HTTP 404 Not Found status code
+
+        return $this->apiResponse->respondError($error, Controller::HTTP_BUSINESS_ERROR);
+    }
 }

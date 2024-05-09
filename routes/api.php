@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use App\Http\V1\Controllers\Auth\LoginController;
 use App\Http\V1\Controllers\Auth\RegisterController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Routes Without authentication

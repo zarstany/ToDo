@@ -24,11 +24,13 @@ class LoginUseCase implements LoginUseCaseInterface
     {
         $userOrNull = $this->userRepository->findByEmail($authUserDTO->getEmail());
 
-        if (!$userOrNull) {
-            throw new InvalidCredentialsException('Invalid credentials.');
+        if (! $userOrNull) {
+            $exception = new UserNotFoundByEmailException();
+            $exception->setEmail($authUserDTO->getEmail());
+            throw $exception;
         }
 
-        if (!Hash::check($authUserDTO->getPassword(), $userOrNull->password)) {
+        if (! Hash::check($authUserDTO->getPassword(), $userOrNull->password)) {
             throw new InvalidCredentialsException('Incorrect password or email.');
         }
 
@@ -36,6 +38,7 @@ class LoginUseCase implements LoginUseCaseInterface
         $token = $userOrNull->createToken('rememberToken')->plainTextToken;
         $authUserDTO->setToken($token);
         $authUserDTO->setName($userOrNull->name);
+
         return $authUserDTO;
     }
 }

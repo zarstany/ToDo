@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-
 class EloquentUserRepository implements UserRepositoryInterface
 {
     /**
@@ -45,15 +44,12 @@ class EloquentUserRepository implements UserRepositoryInterface
         }
     }
 
-    /**
-     * @param AuthUserDTO $userDTO
-     */
     public function create(AuthUserDTO $userDTO): User
     {
         return User::create([
             'name' => $userDTO->getName(),
             'email' => $userDTO->getEmail(),
-            'password' => $userDTO->getPassword()
+            'password' => $userDTO->getPassword(),
         ]);
 
     }

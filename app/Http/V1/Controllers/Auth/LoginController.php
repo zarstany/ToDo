@@ -21,18 +21,19 @@ class LoginController
         private readonly LoginUseCaseInterface $loginUseCase,
         private readonly APIResponseInterface $apiResponse,
         private readonly LoginErrorResponse $loginErrorResponse
-    ){
+    ) {
     }
 
-    public function __invoke(Request $request):JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|min:8',
+            'email' => 'required',
+            'password' => 'required',
         ]);
 
         if ($validator->fails()) {
             Log::error('Parameters invalid', ['Login' => 'parameters invalid for login']);
+
             return $this->apiResponse->respondFormErrors($validator->errors(), Controller::HTTP_BAD_REQUEST);
         }
         $email = $request->get('email');
@@ -45,11 +46,11 @@ class LoginController
             $this->loginUseCase->execute($userDTo);
             $httpObjectDTO = new HttpObjectDTO();
             $httpObjectDTO->setItem($userDTo);
-            return $this->apiResponse->responseItem($httpObjectDTO,new AuthUserTransformer());
-        }
-        catch (Throwable $throwable) {
-            return $this->loginErrorResponse->handle($throwable, $email, $password, );
+
+            return $this->apiResponse->responseItem($httpObjectDTO, new AuthUserTransformer());
+        } catch (Throwable $throwable) {
+
+            return $this->loginErrorResponse->handle($throwable, $email, $password);
         }
     }
-
 }
