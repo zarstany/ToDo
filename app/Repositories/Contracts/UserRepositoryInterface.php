@@ -9,8 +9,6 @@ use App\Models\User;
 
 interface UserRepositoryInterface
 {
-
-
     /**
      * @throws UserNotFoundByEmailException
      */

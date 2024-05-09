@@ -23,14 +23,12 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(UserRepositoryInterface::class, EloquentUserRepository::class);
 
-
         //UseCases
-        $this->app->bind(RegisterUseCaseInterface::class,RegisterUseCase::class);
+        $this->app->bind(RegisterUseCaseInterface::class, RegisterUseCase::class);
         $this->app->bind(LoginUseCaseInterface::class, LoginUseCase::class);
         //Presentation Layer
 
         $this->app->bind(APIResponseInterface::class, ArrayResponse::class);
-
 
     }
 

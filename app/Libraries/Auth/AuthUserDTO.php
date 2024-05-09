@@ -7,11 +7,14 @@ use stdClass;
 class AuthUserDTO extends stdClass
 {
     private string $userId;
-    private string $email;
-    private string $name;
-    private string $password;
-    private string $token;
 
+    private string $email;
+
+    private string $name;
+
+    private string $password;
+
+    private string $token;
 
     public function getToken(): string
     {
@@ -21,6 +24,7 @@ class AuthUserDTO extends stdClass
     public function setToken(string $token): AuthUserDTO
     {
         $this->token = $token;
+
         return $this;
     }
 
@@ -32,10 +36,9 @@ class AuthUserDTO extends stdClass
     public function setPassword($password): AuthUserDTO
     {
         $this->password = $password;
+
         return $this;
     }
-
-
 
     public function getName(): string
     {
@@ -45,6 +48,7 @@ class AuthUserDTO extends stdClass
     public function setName(string $name): AuthUserDTO
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -71,5 +75,4 @@ class AuthUserDTO extends stdClass
 
         return $this;
     }
-
 }

@@ -26,7 +26,7 @@ class RegisterErrorResponse
      */
     private array $awareOf = [
         EmailUsedException::class => 'emailUsedException',
-        UserNotFoundByEmailException::class => 'userNotFoundByEmailException'
+        UserNotFoundByEmailException::class => 'userNotFoundByEmailException',
     ];
 
     /**
@@ -36,7 +36,7 @@ class RegisterErrorResponse
     {
         $className = get_class($throwable);
 
-        if (!array_key_exists($className, $this->awareOf)) {
+        if (! array_key_exists($className, $this->awareOf)) {
             $this->logger->error('v1 register error', [
                 'class' => get_class($throwable),
                 'email' => $email,
@@ -68,5 +68,4 @@ class RegisterErrorResponse
 
         return $this->apiResponse->respondError($error, Controller::HTTP_BUSINESS_ERROR);
     }
-
 }

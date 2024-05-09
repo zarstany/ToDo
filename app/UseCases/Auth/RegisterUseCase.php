@@ -11,15 +11,16 @@ use App\UseCases\Contracts\Users\RegisterUseCaseInterface;
 
 class RegisterUseCase implements RegisterUseCaseInterface
 {
-
     public function __construct(private readonly UserRepositoryInterface $userRepository)
-    {}
+    {
+    }
 
     /**
      * Register a new user or throw an exception if the email is already used.
      *
-     * @param AuthUserDTO $authUserDTO Data Transfer Object with user information.
+     * @param  AuthUserDTO  $authUserDTO  Data Transfer Object with user information.
      * @return User Data Transfer Object of the newly created user.
+     *
      * @throws EmailUsedException if the email is already in use.
      */
     public function execute(AuthUserDTO $authUserDTO): User
@@ -34,6 +35,7 @@ class RegisterUseCase implements RegisterUseCaseInterface
             $user = $this->userRepository->create($authUserDTO);
             $token = $user->createToken('rememberToken')->plainTextToken;
             $authUserDTO->setToken($token);
+
             return $user;
         }
     }
