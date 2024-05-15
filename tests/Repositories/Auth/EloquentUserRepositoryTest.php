@@ -11,8 +11,6 @@ use Tests\TestCase;
 
 class EloquentUserRepositoryTest extends TestCase
 {
-    use DatabaseTransactions;
-
     private $userRepository;
 
     protected function setUp(): void

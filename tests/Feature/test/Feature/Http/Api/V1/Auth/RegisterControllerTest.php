@@ -1,6 +1,6 @@
 <?php
 
-namespace test\Feature\Http\Api\V1;
+namespace Tests\Feature\test\Feature\Http\Api\V1\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

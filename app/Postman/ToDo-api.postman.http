@@ -1,0 +1,53 @@
+GET {local}api/item?id=99
+Accept: application/json
+
+
+###
+# @name Register
+POST {{local}}/api/register
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "zar",
+    "email": "zar1@gmail.com",
+    "password": "Todo!2024."
+}
+
+###
+# @name Login
+POST {{local}}/api/v1/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "zar@gmail.com",
+    "password": "Todo!2024."
+}
+
+### Type status[Pending,In progress,Completed]
+# @name Save Tasks
+POST {{local}}/api/tasks/store
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 1|z3hkMega9qXq8Ok17LGdBLSu3btSVAYiZckmvBPke8f37e27
+
+{
+    "title": "complete App",
+    "description": "complete the application in progress",
+    "status": "In progress"
+}
+
+
+### Type status[Pending,In progress,Completed]
+# @name Update Tasks
+PUT {{local}}/api/tasks/update/9
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 2|F3bEVMfqPivetDNIswhqbvmidQs9riYyHm0Me8jW951698bc
+
+{
+    "title": "complet2e App",
+    "description": "complet2e the application in progress",
+    "status": "Completed"
+}
