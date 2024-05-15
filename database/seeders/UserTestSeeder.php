@@ -17,5 +17,7 @@ class UserTestSeeder extends Seeder
             'email' => 'johndoe@example.com',
             'password' => bcrypt('Todo!2024.'),
         ]);
+
+        // php artisan db:seed --class=UserTestSeeder
     }
 }
