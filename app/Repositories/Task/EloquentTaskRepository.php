@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Task;
 
 use App\DTOs\TaskDTO;
 use App\Exceptions\Tasks\TaskNotFoundByIdException;
@@ -24,6 +24,22 @@ class EloquentTaskRepository implements TaskRepositoryInterface
             'user_id' => $userId
         ]);
 
+    }
+    /**
+     * @param int $taskId
+     * @param int $userId
+     * @return Void
+     */
+    public function deleteTask(int $taskId, int $userId): void
+    {
+        try {
+            $task = Task::where('user_id', $userId)->where('id', $taskId)->firstOrFail();
+            $task->delete();
+        } catch (ModelNotFoundException $e) {
+            $exception = new TaskNotFoundByIdException();
+            $exception->setTaskId($taskId);
+            throw $exception;
+        }
     }
 
     /**

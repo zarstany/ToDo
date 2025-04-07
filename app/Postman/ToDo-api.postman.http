@@ -3,6 +3,7 @@ Accept: application/json
 
 
 ###
+@local =http://127.0.0.1:8000
 # @name Register
 POST {{local}}/api/register
 Content-Type: application/json
@@ -16,12 +17,12 @@ Accept: application/json
 
 ###
 # @name Login
-POST {{local}}/api/v1/login
+POST {{local}}/api/login
 Content-Type: application/json
 Accept: application/json
 
 {
-    "email": "zar@gmail.com",
+    "email": "zar1@gmail.com",
     "password": "Todo!2024."
 }
 
@@ -30,7 +31,7 @@ Accept: application/json
 POST {{local}}/api/tasks/store
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 1|z3hkMega9qXq8Ok17LGdBLSu3btSVAYiZckmvBPke8f37e27
+Authorization: Bearer 3|DHuU6pFDO86K2g1yNy84QxJSUbECAjp4eMtTMqad45a7851e
 
 {
     "title": "complete App",
@@ -41,13 +42,25 @@ Authorization: Bearer 1|z3hkMega9qXq8Ok17LGdBLSu3btSVAYiZckmvBPke8f37e27
 
 ### Type status[Pending,In progress,Completed]
 # @name Update Tasks
-PUT {{local}}/api/tasks/update/9
+PUT {{local}}/api/tasks/update
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 2|F3bEVMfqPivetDNIswhqbvmidQs9riYyHm0Me8jW951698bc
+Authorization: Bearer 3|DHuU6pFDO86K2g1yNy84QxJSUbECAjp4eMtTMqad45a7851e
 
 {
+    "task_id": 2,
     "title": "complet2e App",
     "description": "complet2e the application in progress",
     "status": "Completed"
+}
+
+###
+# @name Deleted Tasks
+DELETE {{local}}/api/tasks/delete
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 3|DHuU6pFDO86K2g1yNy84QxJSUbECAjp4eMtTMqad45a7851e
+
+{
+    "task_id": 1
 }

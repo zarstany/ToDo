@@ -7,7 +7,7 @@ use App\Libraries\Responders\Contracts\APIResponseInterface;
 use App\Repositories\Auth\EloquentUserRepository;
 use App\Repositories\Contracts\TaskRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use App\Repositories\EloquentTaskRepository;
+use App\Repositories\Task\EloquentTaskRepository;
 use App\UseCases\Auth\LoginUseCase;
 use App\UseCases\Auth\RegisterUseCase;
 use App\UseCases\Contracts\Tasks\UpdateTaskUseCaseInterface;

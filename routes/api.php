@@ -5,6 +5,7 @@ use App\Http\V1\Controllers\Auth\RegisterController;
 use App\Http\V1\Controllers\Tasks\CreateTaskController;
 use App\Http\V1\Controllers\Tasks\UpdateTaskController;
 use Illuminate\Support\Facades\Route;
+use App\Http\V1\Controllers\Tasks\DeleteTaskController;
 
 // Routes Without authentication
 Route::post('register', RegisterController::class);
@@ -14,5 +15,6 @@ Route::post('login', LoginController::class);
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('tasks/store', CreateTaskController::class);
-    Route::put('tasks/update/{taskId}', UpdateTaskController::class);
+    Route::put('tasks/update', UpdateTaskController::class);
+    Route::delete('tasks/delete',DeleteTaskController::class);
 });
