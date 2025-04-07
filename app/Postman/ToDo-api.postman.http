@@ -64,3 +64,13 @@ Authorization: Bearer 3|DHuU6pFDO86K2g1yNy84QxJSUbECAjp4eMtTMqad45a7851e
 {
     "task_id": 1
 }
+
+###
+# @name Get Tasks By User
+GET {{local}}/api/tasks
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 3|DHuU6pFDO86K2g1yNy84QxJSUbECAjp4eMtTMqad45a7851e
+
+{
+}

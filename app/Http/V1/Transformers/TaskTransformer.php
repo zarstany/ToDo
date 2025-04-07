@@ -14,6 +14,7 @@ class TaskTransformer extends TransformerAbstract
     public function transform(TaskDTO $taskDTO): array
     {
         return [
+            'id' => $taskDTO->getTaskId(),
             'title' => $taskDTO->getTitle(),
             'description' => $taskDTO->getDescription(),
             'status' => $taskDTO->getStatus(),

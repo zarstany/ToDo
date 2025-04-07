@@ -7,9 +7,18 @@ use App\Exceptions\Tasks\TaskNotFoundByIdException;
 use App\Models\Task;
 use App\Repositories\Contracts\TaskRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use  Illuminate\Database\Eloquent\Collection;
 
 class EloquentTaskRepository implements TaskRepositoryInterface
 {
+    /**
+     * @param int $userId
+     * @return Collection
+     */
+    public function allTasksByUserId( int $userId):Collection
+    {
+        return Task::where('user_id', $userId)->whereNull('deleted_at')->get();
+    }
     /**
      * @param TaskDTO $taskDTO
      * @param int $userId
